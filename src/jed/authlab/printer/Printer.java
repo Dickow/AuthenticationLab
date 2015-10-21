@@ -67,6 +67,11 @@ public class Printer implements Runnable, IPrintCompute{
     }
 
     @Override
+    public boolean authenticate(String hashValue, String userName) throws RemoteException {
+        return false;
+    }
+
+    @Override
     public void setConfig(String parameter, String value) throws RemoteException {
 
     }
