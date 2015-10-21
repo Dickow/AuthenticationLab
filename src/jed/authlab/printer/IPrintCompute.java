@@ -24,6 +24,8 @@ public interface IPrintCompute extends Remote{
 
     String readConfig(String parameter) throws RemoteException;
 
+    boolean authenticate(String hashValue, String userName) throws RemoteException;
+
     void setConfig(String parameter, String value) throws RemoteException;
 
 }
