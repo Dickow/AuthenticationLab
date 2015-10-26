@@ -15,7 +15,7 @@ import java.rmi.registry.Registry;
  * Created by Jeppe Dickow.
  */
 public class PrinterTest {
-    String name;
+    String name, hashedPass;
     IPrintCompute printer;
     Registry registry;
 
@@ -31,6 +31,7 @@ public class PrinterTest {
         }
         try {
             printer = (IPrintCompute)registry.lookup(name);
+            hashedPass = String.format("%d","password1234".hashCode());
         } catch (AccessException e) {
             System.out.println("Could not access the registry");
             e.printStackTrace();
@@ -44,59 +45,61 @@ public class PrinterTest {
     }
 
     @Test
-    public void testRun() throws Exception {
-
-    }
-
-    @Test
     public void testPrint() throws Exception {
         printer.print("testprinter.txt", "cloudPrinter");
     }
 
     @Test
     public void testAuthenticate() throws Exception{
-        String hashedPass = String.format("%d","password1234".hashCode());
         boolean auth = printer.authenticate(hashedPass, "Jeppe Dickow");
         Assert.assertEquals(auth, true);
     }
 
     @Test
     public void testQueue() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.queue();
     }
 
     @Test
     public void testTopQueue() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.topQueue(10);
     }
 
     @Test
     public void testStart() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.start();
     }
 
     @Test
     public void testStop() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.stop();
     }
 
     @Test
     public void testRestart() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.restart();
     }
 
     @Test
     public void testStatus() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.status();
     }
 
     @Test
     public void testReadConfig() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.readConfig("config parameter");
     }
 
     @Test
     public void testSetConfig() throws Exception {
-
+        printer.authenticate(hashedPass, "Jeppe Dickow");
+        printer.setConfig("config parameter", "test value");
     }
 }

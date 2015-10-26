@@ -34,6 +34,7 @@ public class Printer implements Runnable, IPrintCompute{
         if(authenticated) {
             System.out.println(String.format("filename = %s printer = %s", filename, printer));
             authenticated = false;
+            return;
         }
         System.out.println("print invoked unauthorized");
     }
@@ -53,6 +54,7 @@ public class Printer implements Runnable, IPrintCompute{
         if(authenticated) {
             System.out.println(String.format("topQueue invoked with job :%d", job));
             authenticated = false;
+            return;
         }
         System.out.println("topQueue invoked unauthorized");
     }
