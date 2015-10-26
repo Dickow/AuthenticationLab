@@ -1,6 +1,7 @@
 package jed.authlab.Test;
 
 import jed.authlab.printer.IPrintCompute;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,8 +10,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Jeppe Dickow.
@@ -52,6 +51,13 @@ public class PrinterTest {
     @Test
     public void testPrint() throws Exception {
         printer.print("testprinter.txt", "cloudPrinter");
+    }
+
+    @Test
+    public void testAuthenticate() throws Exception{
+        String hashedPass = String.format("%d","password1234".hashCode());
+        boolean auth = printer.authenticate(hashedPass, "Jeppe Dickow");
+        Assert.assertEquals(auth, true);
     }
 
     @Test

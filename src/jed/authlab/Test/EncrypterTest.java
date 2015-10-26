@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Created by SharkGaming on 10/21/2015.
+ * Created by Jeppe Dickow on 10/21/2015.
  */
 public class EncrypterTest {
     Encrypter crypto;

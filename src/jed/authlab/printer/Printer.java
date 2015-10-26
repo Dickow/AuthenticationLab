@@ -1,9 +1,12 @@
 package jed.authlab.printer;
 
+import jed.authlab.security.CredentialsManager;
+
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 /**
  * Created by Jeppe Dickow
@@ -68,6 +71,15 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public boolean authenticate(String hashValue, String userName) throws RemoteException {
+
+        try {
+            System.out.println("before user check");
+            boolean userExists = CredentialsManager.getInstance().authenticate(hashValue);
+            System.out.println("after user check");
+            return userExists;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
