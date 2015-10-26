@@ -23,9 +23,16 @@ public class CredentialsManager {
         db = new Database();
     }
 
+
+    /**
+     * try to authenticate the user against the db
+     * @param securePass
+     * @return
+     * @throws SQLException
+     */
     public boolean authenticate(String securePass) throws SQLException {
 
-        // TODO not safe against SQL injection
+        // TODO not safe against SQL injection but it is intended to be
         Connection conn = db.getConn();
         Statement stmt = conn.createStatement();
         String sql = String.format("SELECT * FROM CREDENTIALS WHERE PASSWORD = '%s'", securePass);

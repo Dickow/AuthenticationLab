@@ -6,6 +6,8 @@ import java.sql.Statement;
 
 /**
  * Created by Jeppe Dickow on 10/26/2015.
+ * This class is intended to setup the database, this should be run before anything else.
+ * It also populates the database with one entry
  */
 public class InitDB {
     private static Connection conn = null;
