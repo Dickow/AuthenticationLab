@@ -119,7 +119,7 @@ public class Printer implements Runnable, IPrintCompute{
 
         try {
             System.out.println(hashValue);
-            boolean userExists = CredentialsManager.getInstance().authenticate(hashValue);
+            boolean userExists = CredentialsManager.getInstance().authenticate(hashValue, userName);
             authenticated = userExists;
             return userExists;
         } catch (SQLException e) {
