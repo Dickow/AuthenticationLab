@@ -10,7 +10,7 @@ public class Database {
     public Database(){
         try{
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:authenticationlab.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:authenticationlab.sqlite");
         }catch(Exception e){
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);

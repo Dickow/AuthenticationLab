@@ -118,6 +118,7 @@ public class Printer implements Runnable, IPrintCompute{
     public boolean authenticate(String hashValue, String userName) throws RemoteException {
 
         try {
+            System.out.println(hashValue);
             boolean userExists = CredentialsManager.getInstance().authenticate(hashValue);
             authenticated = userExists;
             return userExists;

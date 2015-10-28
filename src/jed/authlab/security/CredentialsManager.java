@@ -35,11 +35,27 @@ public class CredentialsManager {
         // TODO not safe against SQL injection but it is intended to be
         Connection conn = db.getConn();
         Statement stmt = conn.createStatement();
-        String sql = String.format("SELECT * FROM CREDENTIALS WHERE PASSWORD = '%s'", securePass);
+        String sql = String.format("SELECT * FROM CREDENTIALS WHERE PASSWORD = '%s';", securePass);
         ResultSet result = stmt.executeQuery(sql);
         boolean exists = result.isBeforeFirst();
         System.out.println(exists);
         return exists;
+    }
+
+    /***
+     * This is used to populate some data into the database, preferably this would be done with some registration method.
+     * @param userName
+     * @param securePass
+     * @throws SQLException
+     */
+    public void registerUser(String userName, String securePass) throws SQLException {
+        // TODO not safe against SQL injection but it is intended to be
+        Connection conn = db.getConn();
+        Statement stmt = conn.createStatement();
+        String sql = String.format("INSERT INTO CREDENTIALS (NAME, PASSWORD) " +
+                "VALUES('%s', '%s');", userName, securePass);
+        stmt.execute(sql);
+        stmt.close();
     }
 
 }

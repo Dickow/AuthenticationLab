@@ -12,20 +12,20 @@ import java.sql.Statement;
 public class InitDB {
     private static Connection conn = null;
     public static void main(String[] args) {
+        initAuthDb();
+    }
+
+
+    private static void initAuthDb(){
         try{
             Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:authenticationlab.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:authenticationlab.sqlite");
             Statement stmt = conn.createStatement();
             String sql = "CREATE TABLE CREDENTIALS " +
-                    "(ID         INT PRIMARY KEY     NOT NULL," +
+                    "(ID         INT                PRIMARY KEY," +
                     "NAME       TEXT                NOT NULL," +
                     "PASSWORD   TEXT                NOT NULL);";
             stmt.executeUpdate(sql);
-
-            String hashedPassword = String.format("%d", "password1234".hashCode());
-            sql = String.format("INSERT INTO CREDENTIALS (ID, NAME, PASSWORD) " +
-                    "VALUES(1, 'Jeppe Dickow', '%s');", hashedPassword);
-            stmt.execute(sql);
             stmt.close();
         }catch(Exception e){
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

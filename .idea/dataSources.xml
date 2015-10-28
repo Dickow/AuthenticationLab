@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="4196290212">
+    <data-source source="LOCAL" name="authenticationlab" uuid="2ade90c4-3400-409a-9585-0b7f41fe822f">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Jeppe_000\IntelliJProjects\AuthenticationLab\authenticationlab.sqlite</jdbc-url>
+      <libraries>
+        <library>
+          <url>jar://$PROJECT_DIR$/JDBC driver/sqlite-jdbc-3.8.11.2.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>

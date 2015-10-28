@@ -1,6 +1,8 @@
 package jed.authlab.Test;
 
 import jed.authlab.printer.IPrintCompute;
+import jed.authlab.security.CredentialsManager;
+import jed.authlab.security.Encrypter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,12 +12,13 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Arrays;
 
 /**
  * Created by Jeppe Dickow.
  */
 public class PrinterTest {
-    String name, hashedPass;
+    String name, hashedPass, salt;
     IPrintCompute printer;
     Registry registry;
 
@@ -31,7 +34,10 @@ public class PrinterTest {
         }
         try {
             printer = (IPrintCompute)registry.lookup(name);
-            hashedPass = String.format("%d","password1234".hashCode());
+            Encrypter crypto = new Encrypter();
+            salt = crypto.generateSalt();
+            hashedPass = crypto.byteToBase64(crypto.getHash("password1234", salt.getBytes()));
+            CredentialsManager.getInstance().registerUser("Jeppe Dickow", hashedPass);
         } catch (AccessException e) {
             System.out.println("Could not access the registry");
             e.printStackTrace();
@@ -40,6 +46,10 @@ public class PrinterTest {
             e.printStackTrace();
         } catch (NotBoundException e) {
             System.out.println("Registry not bound");
+            e.printStackTrace();
+        }
+        catch (Exception e){
+            System.out.println("Crypto caused troubles");
             e.printStackTrace();
         }
     }
