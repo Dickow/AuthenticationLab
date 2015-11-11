@@ -58,4 +58,13 @@ public class AccessControlReader {
         }
         return null;
     }
+
+    public boolean hasAccess(Access accessLevel, String accessRequired){
+        for(String access : accessLevel.getAccessLevels()){
+            if(access.equalsIgnoreCase(accessRequired)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

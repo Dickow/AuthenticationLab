@@ -1,5 +1,7 @@
 package jed.authlab.printer;
 
+import jed.authlab.security.Access;
+import jed.authlab.security.AccessControlReader;
 import jed.authlab.security.CredentialsManager;
 
 import java.rmi.RemoteException;
@@ -13,6 +15,7 @@ import java.sql.SQLException;
  */
 public class Printer implements Runnable, IPrintCompute{
     private boolean authenticated = false;
+    private Access accessLevel;
     @Override
     public void run() {
         // register the Printer in the RMI Register
@@ -22,7 +25,6 @@ public class Printer implements Runnable, IPrintCompute{
             IPrintCompute stub = (IPrintCompute) UnicastRemoteObject.exportObject(printer, 0);
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.rebind(name, stub);
-
         }catch(Exception e){
             System.out.println("Could not bind the printer to the register");
             e.printStackTrace();
@@ -31,7 +33,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public void print(String filename, String printer) throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "print";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println(String.format("filename = %s printer = %s", filename, printer));
             authenticated = false;
             return;
@@ -41,7 +44,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public String queue() throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "queue";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println("queue invoked");
             authenticated = false;
             return "queue invoked";
@@ -51,7 +55,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public void topQueue(int job) throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "topQueue";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println(String.format("topQueue invoked with job :%d", job));
             authenticated = false;
             return;
@@ -61,7 +66,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public boolean start() throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "start";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println("start invoked");
             authenticated = false;
             return true;
@@ -72,7 +78,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public boolean stop() throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "stop";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println("stop invoked");
             authenticated = false;
             return true;
@@ -83,7 +90,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public boolean restart() throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "restart";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println("restart invoked");
             authenticated = false;
             return true;
@@ -94,7 +102,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public String status() throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "status";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println("status invoked");
             authenticated = false;
             return "status";
@@ -105,7 +114,8 @@ public class Printer implements Runnable, IPrintCompute{
 
     @Override
     public String readConfig(String parameter) throws RemoteException {
-        if(authenticated) {
+        String accessRequired = "readConfig";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
             System.out.println(String.format("readConfig invoked with parameter: %s", parameter));
             authenticated = false;
             return "readConfig";
@@ -115,21 +125,27 @@ public class Printer implements Runnable, IPrintCompute{
     }
 
     @Override
+    public void setConfig(String parameter, String value) throws RemoteException {
+        String accessRequired = "setConfig";
+        if(authenticated && AccessControlReader.getInstance().hasAccess(accessLevel, accessRequired)) {
+            System.out.println(String.format("setConfig invoked with parameter: %s and value: %s", parameter, value));
+            authenticated = false;
+        }
+        System.out.println("setConfig invoked unauthorized");
+    }
+
+    @Override
     public boolean authenticate(String hashValue, String userName) throws RemoteException {
 
         try {
             System.out.println(hashValue);
             boolean userExists = CredentialsManager.getInstance().authenticate(hashValue, userName);
             authenticated = userExists;
+            accessLevel = userExists ? AccessControlReader.getInstance().getAccessLevel(userName) : null;
             return userExists;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
-    }
-
-    @Override
-    public void setConfig(String parameter, String value) throws RemoteException {
-        System.out.println(String.format("setConfig invoked with parameter: %s and value: %s", parameter, value));
     }
 }
