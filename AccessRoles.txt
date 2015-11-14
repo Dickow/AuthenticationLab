@@ -1,0 +1,4 @@
+MANAGER:print,queue,topqueue,start,stop,restart,status,setconfig,readconfig
+SERVICETECHNICIAN:start,stop,restart,status,setconfig,readconfig
+POWERUSER:print,queue,topqueue,restart
+ORDINARYUSER:print,queue

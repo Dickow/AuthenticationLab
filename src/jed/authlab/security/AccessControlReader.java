@@ -25,7 +25,7 @@ public class AccessControlReader {
      * @param filePath
      * @return
      */
-    public ArrayList<Access> readAccessFile(String filePath){
+    private ArrayList<Access> readAccessFile(String filePath){
         ArrayList<Access> accesses = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));

@@ -1,7 +1,7 @@
 package jed.authlab.DataAccess;
 
 import jed.authlab.security.Encrypter;
-import jed.authlab.security.Roles;
+import jed.authlab.security.Role;
 import jed.authlab.security.SaltManager;
 
 import java.sql.Connection;
@@ -16,8 +16,8 @@ import java.sql.Statement;
 public class InitDB {
     private static Connection conn = null;
     private static String[] names = {"Alice","Bob","Cecilia","David","Erica","Fred","George"};
-    private static Roles[] roles = {Roles.MANAGER, Roles.SERVICETECHNICIAN, Roles.POWERUSER, Roles.ORDINARYUSER,
-            Roles.ORDINARYUSER, Roles.ORDINARYUSER, Roles.ORDINARYUSER};
+    private static Role[] roles = {Role.MANAGER, Role.SERVICETECHNICIAN, Role.POWERUSER, Role.ORDINARYUSER,
+            Role.ORDINARYUSER, Role.ORDINARYUSER, Role.ORDINARYUSER};
 
     public static void main(String[] args) {
         initAuthDb();
