@@ -28,6 +28,19 @@ public class Access {
     public void setAccessLevels(String[] accessLevels) {
         this.accessLevels = accessLevels;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Access: userName: ");
+        sb.append(this.userName);
+        sb.append(" access levels: ");
+        for(int i = 0; i < accessLevels.length; i++){
+            sb.append(accessLevels[i]);
+            sb.append(", ");
+        }
+        return sb.toString();
+    }
 }
 
 

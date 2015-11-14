@@ -1,7 +1,7 @@
 package jed.authlab.security;
 
 /**
- * Created by SharkGaming on 11/11/2015.
+ * Created by Jeppe Dickow on 11/11/2015.
  */
 public class CreateSalts {
     public static void main(String[] args) {

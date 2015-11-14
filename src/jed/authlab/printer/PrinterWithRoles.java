@@ -14,14 +14,14 @@ import java.sql.SQLException;
 /**
  * Created by Jeppe Dickow
  */
-public class Printer implements Runnable, IPrintCompute{
+public class PrinterWithRoles implements Runnable, IPrintCompute{
     private boolean authenticated = false;
     private Access accessLevel;
     @Override
     public void run() {
         // register the Printer in the RMI Register
-        String name = "Printer";
-        IPrintCompute printer = new Printer();
+        String name = "PrinterWithRoles";
+        IPrintCompute printer = new PrinterWithRoles();
         try {
             IPrintCompute stub = (IPrintCompute) UnicastRemoteObject.exportObject(printer, 0);
             Registry registry = LocateRegistry.createRegistry(1099);

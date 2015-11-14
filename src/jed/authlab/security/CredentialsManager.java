@@ -32,14 +32,13 @@ public class CredentialsManager {
      * @return
      * @throws SQLException
      */
-    public boolean authenticate(String securePass, String userName) throws SQLException {
+    public Credential authenticate(String securePass, String userName) throws SQLException {
 
         // TODO not safe against SQL injection but it is intended to be
         Connection conn = db.getConn();
         Statement stmt = conn.createStatement();
         String sql = String.format("SELECT * FROM CREDENTIALS WHERE PASSWORD = '%s' AND NAME = '%s';", securePass, userName);
         ResultSet result = stmt.executeQuery(sql);
-        System.out.println(result.toString());
         ArrayList<Credential> list = new ArrayList<>();
         while(result.next()){
             Credential cred = new Credential();
@@ -47,12 +46,14 @@ public class CredentialsManager {
             cred.setPassword(result.getString("PASSWORD"));
             list.add(cred);
         }
-
+        /*
         System.out.println(list.size() > 0);
         for(Credential c : list){
             System.out.println(String.format("name: %s  password: %s",c.getName(), c.getPassword()));
         }
-        return list.size() > 0;
+        */
+        // just returning the first value found otherwise null of the user did not exist
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     /***

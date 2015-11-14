@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1497410203">
-    <data-source source="LOCAL" name="authenticationlab" uuid="1c5fb3eb-6d1a-48ef-ad97-f40653917c8a">
+  <component name="DataSourceManagerImpl" format="xml" hash="541499077">
+    <data-source source="LOCAL" name="authenticationlab" uuid="d3846a85-98a8-4ebf-81bf-2aaad3303b26">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
