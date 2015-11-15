@@ -17,14 +17,13 @@ public class CredentialsManager {
 
     private Database db;
 
-    public static CredentialsManager getInstance() {
-        return ourInstance;
-    }
-
     private CredentialsManager() {
         db = new Database();
     }
 
+    public static CredentialsManager getInstance() {
+        return ourInstance;
+    }
 
     /**
      * try to authenticate the user against the db
@@ -44,6 +43,7 @@ public class CredentialsManager {
             Credential cred = new Credential();
             cred.setName(result.getString("NAME"));
             cred.setPassword(result.getString("PASSWORD"));
+            cred.setRole(Role.valueOf(result.getString("ROLE")));
             list.add(cred);
         }
         /*
