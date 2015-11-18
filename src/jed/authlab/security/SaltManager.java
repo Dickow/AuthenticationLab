@@ -5,16 +5,16 @@ package jed.authlab.security;
  */
 public class SaltManager {
     private static SaltManager ourInstance = new SaltManager();
+    private String[] salts = {"\u0015äã1aá¬?ÂO†È=ÃÇJßŠšd", "?p¿7ó0ÿ›¥[º%ë,ƒ/uŠÚ¦", "\u0002+QçgI™Tìâm\u001E(Ñ.$\u0007üéú",
+            "ŠåßOŒ\u001CšïÃ@ƒa¯\u0001DN=ýX", "\u0015[\tàŠ\u0001ÿ¶>¦\u0017›}Ö•\u001D\u001E],‹", "?wnö[yKó/?AÆ\u000Bv\u0004[\\g¦€",
+            "|?=b/CK¢Ðˆ\u0018»®wìúc÷#‡", "«˜Ã·DY\u0006\\([·È|\u000BÙ <žÙI"};
+
+    private SaltManager() {
+    }
 
     public static SaltManager getInstance() {
         return ourInstance;
     }
-
-    private SaltManager() {
-    }
-    private String[] salts = {"gà?\u0001’œ‹UR`.Y&ÕY;û\u0014\"Ò","G`Í°†Jfý‘¹‹+]!Çˆö\\K-",
-            "ï„\u0012ôI\u0001O\u0006ËÌ˜^/\u0010¨yRø®ˆ","úÉˆæ›ûn¿†\u000B?\u00AD@i×–…3Òƒ",
-            "n€ÿx?%c\u0010\u000EMÕ\u0010÷©³‡§=¬.","â!zuAvÑ‡?Àâ·mo)¨^)Á>","¯|Ü„ë\u0015t[w\u0011•¸P,,\u001Cÿ¨x"};
 
     public String getSalt(int index){
         if(index > salts.length){

@@ -15,9 +15,9 @@ import java.sql.Statement;
  */
 public class InitDB {
     private static Connection conn = null;
-    private static String[] names = {"Alice","Bob","Cecilia","David","Erica","Fred","George"};
+    private static String[] names = {"Alice", "Ida", "Cecilia", "David", "Erica", "Fred", "George", "Henry"};
     private static Role[] roles = {Role.MANAGER, Role.SERVICETECHNICIAN, Role.POWERUSER, Role.ORDINARYUSER,
-            Role.ORDINARYUSER, Role.ORDINARYUSER, Role.ORDINARYUSER};
+            Role.ORDINARYUSER, Role.ORDINARYUSER, Role.ORDINARYUSER, Role.MANAGER, Role.ORDINARYUSER};
 
     public static void main(String[] args) {
         initAuthDb();

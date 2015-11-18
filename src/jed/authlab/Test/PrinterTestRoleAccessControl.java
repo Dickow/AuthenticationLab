@@ -19,7 +19,7 @@ import java.rmi.registry.Registry;
 public class PrinterTestRoleAccessControl {
 
     // save the names of the users and their salts in tables
-    private static String[] names = {"Alice","Bob","Cecilia","David","Erica","Fred","George"};
+    private static String[] names = {"Alice", "Ida", "Cecilia", "David", "Erica", "Fred", "George", "Henry"};
     Encrypter crypto;
     IPrintCompute printer;
     Registry registry;

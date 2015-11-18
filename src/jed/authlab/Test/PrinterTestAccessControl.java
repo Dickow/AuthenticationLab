@@ -19,15 +19,13 @@ import java.rmi.registry.Registry;
 public class PrinterTestAccessControl {
 
     // save the names of the users and their salts in tables
-    private static String[] names = {"Alice","Bob","Cecilia","David","Erica","Fred","George"};
-
-    // not safe to use the same password for all, but for the sake of testing it works fine
-    private String password = "Password1234";
+    private static String[] names = {"Alice", "Ida", "Cecilia", "David", "Erica", "Fred", "George", "Henry"};
     Encrypter crypto;
     IPrintCompute printer;
     Registry registry;
     boolean setupIsDone = false;
-
+    // not safe to use the same password for all, but for the sake of testing it works fine
+    private String password = "Password1234";
 
     @Before
     public void setUp(){
