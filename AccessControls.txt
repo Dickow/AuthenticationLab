@@ -1,0 +1,8 @@
+Adam:print,queue,topqueue,start,stop,restart,status,setconfig,readconfig
+Benjamin:print,queue,topqueue,restart
+Celine:print,queue,topqueue,restart
+Dennis:start,stop,restart,status,setconfig,readconfig
+Edward:print,queue
+Frederik:print,queue
+George:print,queue
+Herbert:print,queue
